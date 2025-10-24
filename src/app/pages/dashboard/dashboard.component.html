@@ -1,0 +1,86 @@
+<mat-sidenav-container class="dashboard-container">
+  <!-- 🧭 Sidenav -->
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
+    <div class="brand">
+      <mat-icon class="brand-icon">dashboard</mat-icon>
+      <h2>App</h2>
+    </div>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>home</mat-icon> Home
+      </a>
+      <a mat-list-item routerLink="/profile" routerLinkActive="active">
+        <mat-icon>person</mat-icon> Profile
+      </a>
+      <a mat-list-item routerLink="/settings" routerLinkActive="active">
+        <mat-icon>settings</mat-icon> Settings
+      </a>
+      <a mat-list-item (click)="logout()">
+        <mat-icon>logout</mat-icon> Logout
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- 🏠 Main content -->
+  <mat-sidenav-content>
+    <!-- Simple Toolbar -->
+    <mat-toolbar class="toolbar">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="toolbar-title">Dashboard</span>
+      <span class="spacer"></span>
+    </mat-toolbar>
+
+
+    <div class="main-content">
+      <div class="welcome-card">
+        <h1>Search Your Documents 🔍</h1>
+        <p>Enter a reference number below to find your PDF instantly.</p>
+
+        <!-- 🧾 Search Section -->
+        <mat-form-field appearance="outline" class="dashboard-search">
+          <mat-label>Search by Reference</mat-label>
+          <input
+            matInput
+            placeholder="e.g. REF-1001"
+            [(ngModel)]="searchTerm"
+            (keyup.enter)="onSearch()"
+          />
+          <button mat-icon-button matSuffix (click)="onSearch()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <!-- 🕒 Loading -->
+        <div *ngIf="loading" class="search-status">
+          <mat-progress-spinner diameter="40" mode="indeterminate"></mat-progress-spinner>
+          <p>Searching...</p>
+        </div>
+
+        <!-- ⚠️ Error -->
+        <div *ngIf="error && !loading" class="search-error">
+          {{ error }}
+        </div>
+
+        <!-- 📄 Results -->
+        <div *ngIf="!loading && results.length > 0" class="results-list">
+          <mat-card *ngFor="let r of results" class="pdf-card">
+            <div class="pdf-info">
+              <div class="pdf-title">{{ r.title }}</div>
+              <div class="pdf-ref">Ref: {{ r.reference }}</div>
+              <div class="pdf-date" *ngIf="r.uploadedAt">Uploaded: {{ r.uploadedAt }}</div>
+            </div>
+            <a mat-stroked-button color="primary" [href]="r.url" target="_blank">Open</a>
+          </mat-card>
+        </div>
+
+        <!-- 🗒️ No Results -->
+        <div *ngIf="!loading && !error && searchTerm && results.length === 0" class="no-results">
+          No documents found for "<strong>{{ searchTerm }}</strong>"
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
