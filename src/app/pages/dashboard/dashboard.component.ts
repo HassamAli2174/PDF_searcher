@@ -14,6 +14,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { PdfService, PdfItem } from '../../services/pdf.service';
 import { AuthService } from '../../services/auth.service';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,9 +45,10 @@ export class DashboardComponent implements OnDestroy, OnInit {
   constructor(
     private pdfService: PdfService,
     private auth: AuthService,
-    private router: Router  // ✅ FIX: Proper dependency injection
+    private api: ApiService,
+    private router: Router  // Proper dependency injection
   ) {
-    // ✅ Log routing events
+    // prints routing events
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         console.log('🚀 Navigation started to:', event.url);
@@ -58,8 +60,26 @@ export class DashboardComponent implements OnDestroy, OnInit {
         console.error('❌ Navigation error:', event.error);
       }
     });
+// ################### API Service Test Code ###################
+    // ngOnInit(): void {
+    //   this.sendTransaction();
+    // }
+    
+    // sendTransaction() {
+    //   const payload = {
+    //     accountId: '12345',
+    //     amount: 500,
+    //     description: 'Test transaction'
+    //   };
 
-    // ✅ Handle live search
+    //   this.api.postData('transactions', payload).subscribe({
+    //     next: (res) => console.log('✅ Transaction sent:', res),
+    //     error: (err) => console.error('❌ Error:', err)
+    //   });
+    // }
+// ################### API Service Test Code End ###################
+
+    // Handling live search
     this.sub = this.search$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -87,7 +107,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
   onNavClick(route: string) {
     console.log('🖱️ Click detected on:', route);
-    this.router.navigate([`/${route}`]); // ✅ FIX: Actually navigate
+    this.router.navigate([`/${route}`]); // navigation
   }
 
   onSearchManual() {
