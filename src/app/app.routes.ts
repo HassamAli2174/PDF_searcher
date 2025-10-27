@@ -21,4 +21,20 @@ export const routes: Routes = [
         (m) => m.DashboardComponent
       ),
   },
+  {
+    path: 'SearchDoc',
+    // canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/search-doc/search-doc.component').then(
+        (m) => m.SearchDocComponent
+      ),
+  },
+  {
+    path: 'SearchRef',
+    // canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/search-ref/search-ref.component').then(
+        (m) => m.SearchRefComponent
+      ),
+  },
 ];

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -13,6 +13,7 @@ import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { PdfService, PdfItem } from '../../services/pdf.service';
 import { AuthService } from '../../services/auth.service';
+import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnDestroy, OnInit {
   searchTerm = '';
   results: PdfItem[] = [];
   loading = false;
@@ -40,8 +41,25 @@ export class DashboardComponent implements OnDestroy {
   private search$ = new Subject<string>();
   private sub: Subscription;
 
-  constructor(private pdfService: PdfService, private auth: AuthService) {
-    // Debounce user input (300ms) and switch to latest search
+  constructor(
+    private pdfService: PdfService,
+    private auth: AuthService,
+    private router: Router  // ✅ FIX: Proper dependency injection
+  ) {
+    // ✅ Log routing events
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        console.log('🚀 Navigation started to:', event.url);
+      }
+      if (event instanceof NavigationEnd) {
+        console.log('✅ Navigation ended at:', event.url);
+      }
+      if (event instanceof NavigationError) {
+        console.error('❌ Navigation error:', event.error);
+      }
+    });
+
+    // ✅ Handle live search
     this.sub = this.search$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -63,13 +81,20 @@ export class DashboardComponent implements OnDestroy {
     });
   }
 
+  ngOnInit() {
+    console.log('✅ DashboardComponent initialized');
+  }
+
+  onNavClick(route: string) {
+    console.log('🖱️ Click detected on:', route);
+    this.router.navigate([`/${route}`]); // ✅ FIX: Actually navigate
+  }
+
   onSearchManual() {
-    // called on Enter key or Search button — pushes value to the debounced stream
     this.search$.next(this.searchTerm);
   }
 
   onSearch() {
-    // alias for buttons that trigger immediate search
     this.onSearchManual();
   }
 

@@ -1,0 +1,40 @@
+.search-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 1.5rem;
+    background: white;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.search-btn {
+    width: 100%;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.result-card {
+    margin-top: 1.5rem;
+    text-align: left;
+    padding: 1rem;
+    border-left: 4px solid #2196f3;
+    border-radius: 1rem;
+    background: #f9f9ff;
+}

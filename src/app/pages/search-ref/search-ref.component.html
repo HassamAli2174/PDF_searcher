@@ -1,0 +1,28 @@
+<app-page-layout title="Search by Reference ID">
+    <mat-card class="search-card">
+        <h2>Find Reference</h2>
+        <p class="subtitle">Enter a reference ID to view its transaction status.</p>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Reference ID</mat-label>
+            <input matInput [(ngModel)]="refId" (keyup.enter)="onSearch()" />
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" class="search-btn" (click)="onSearch()">
+            Search
+        </button>
+
+        <div *ngIf="loading" class="spinner-container">
+            <mat-spinner diameter="40"></mat-spinner>
+        </div>
+
+        <mat-card *ngIf="result && !loading" class="result-card">
+            <h3>Transaction Details</h3>
+            <p><strong>Ref ID:</strong> {{ result.refId }}</p>
+            <p><strong>Account Holder:</strong> {{ result.accountHolder }}</p>
+            <p><strong>Bank:</strong> {{ result.bank }}</p>
+            <p><strong>Amount:</strong> {{ result.amount }}</p>
+            <p><strong>Status:</strong> {{ result.status }}</p>
+        </mat-card>
+    </mat-card>
+</app-page-layout>

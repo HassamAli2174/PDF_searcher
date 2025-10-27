@@ -36,7 +36,19 @@
         <span>Home</span>
         </div>
       </a>
-  
+      
+        <a mat-list-item routerLink="/SearchDoc" routerLinkActive="active" class="nav-item" (click)="onNavClick('SearchDoc')">
+          <div class="nav-indicator">
+            <mat-icon>description</mat-icon>
+            <span>Search By Doc ID</span>
+          </div>
+        </a>
+          <a mat-list-item routerLink="/SearchRef" routerLinkActive="active" class="nav-item" (click)="onNavClick('SearchRef')">
+            <div class="nav-indicator">
+              <mat-icon>search</mat-icon>
+              <span>Search By Ref ID</span>
+            </div>
+          </a>
       <a mat-list-item routerLink="/profile" routerLinkActive="active" class="nav-item">
         <div class="nav-indicator">
         <mat-icon>person</mat-icon>

@@ -1,0 +1,27 @@
+<app-page-layout title="Search by Document ID">
+    <mat-card class="search-card">
+        <h2>Find Document</h2>
+        <p class="subtitle">Enter a document ID to retrieve its details.</p>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Document ID</mat-label>
+            <input matInput [(ngModel)]="docId" (keyup.enter)="onSearch()" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="search-btn" (click)="onSearch()">
+            Search
+        </button>
+
+        <div *ngIf="loading" class="spinner-container">
+            <mat-spinner diameter="40"></mat-spinner>
+        </div>
+
+        <mat-card *ngIf="result && !loading" class="result-card">
+            <h3>{{ result.title }}</h3>
+            <p><strong>Doc ID:</strong> {{ result.docId }}</p>
+            <p><strong>Uploaded By:</strong> {{ result.uploadedBy }}</p>
+            <p><strong>Uploaded On:</strong> {{ result.uploadedOn }}</p>
+            <p><strong>Status:</strong> {{ result.status }}</p>
+        </mat-card>
+    </mat-card>
+</app-page-layout>
