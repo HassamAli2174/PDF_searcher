@@ -12,6 +12,11 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  searchDocument(documentId: string): Observable<any> {
+    const url = `${this.baseUrl}mydms/searchdocument/${documentId}`;
+    return this.http.get(url);
+  }
+
   //  Send POST data
   postData(endpoint: string, data: any): Observable<any> {
     const url = `${this.baseUrl}/${endpoint}`;
