@@ -14,7 +14,6 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { PdfService, PdfItem } from '../../services/pdf.service';
 import { AuthService } from '../../services/auth.service';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
-import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -45,7 +44,6 @@ export class DashboardComponent implements OnDestroy, OnInit {
   constructor(
     private pdfService: PdfService,
     private auth: AuthService,
-    private api: ApiService,
     private router: Router  // Proper dependency injection
   ) {
     // prints routing events
@@ -60,24 +58,6 @@ export class DashboardComponent implements OnDestroy, OnInit {
         console.error('❌ Navigation error:', event.error);
       }
     });
-// ################### API Service Test Code ###################
-    // ngOnInit(): void {
-    //   this.sendTransaction();
-    // }
-    
-    // sendTransaction() {
-    //   const payload = {
-    //     accountId: '12345',
-    //     amount: 500,
-    //     description: 'Test transaction'
-    //   };
-
-    //   this.api.postData('transactions', payload).subscribe({
-    //     next: (res) => console.log('✅ Transaction sent:', res),
-    //     error: (err) => console.error('❌ Error:', err)
-    //   });
-    // }
-// ################### API Service Test Code End ###################
 
     // Handling live search
     this.sub = this.search$.pipe(
