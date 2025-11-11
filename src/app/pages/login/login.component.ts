@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,7 +14,6 @@ import { AuthService } from '../../services/auth.service';
   imports: [
     CommonModule,
     FormsModule,
-    RouterLink,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -24,16 +23,32 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  email = '';
+  loginid = '';
   password = '';
 
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(private router: Router, private auth: AuthService) { }
 
   onLogin() {
-    if (this.auth.login(this.email, this.password)) {
-      this.router.navigate(['/dashboard']);
-    } else {
-      alert('Invalid email or password');
-    }
+    this.auth.login(this.loginid, this.password).subscribe({
+      next: (res) => {
+        if (res?.jwtToken) {
+          // Redirect based on user category
+          const category = res.usercat?.toUpperCase();
+          if (category === 'ADMIN') {
+            this.router.navigate(['/admin-dashboard']);
+          } else if (category === 'USER') {
+            this.router.navigate(['/user-dashboard']);
+          } else {
+            alert('Unknown user category');
+          }
+        } else {
+          alert(res.loginstatus || 'Invalid credentials');
+        }
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+        alert('Login request failed');
+      },
+    });
   }
 }

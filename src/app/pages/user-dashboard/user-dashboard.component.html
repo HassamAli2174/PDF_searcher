@@ -1,0 +1,110 @@
+<mat-sidenav-container class="dashboard-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav">
+        <div class="brand">
+            <mat-icon class="brand-icon">description</mat-icon>
+            <h2 class="brand-name">DocuFinder</h2>
+        </div>
+    
+        <mat-nav-list class="nav-list">
+            <a mat-list-item routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+                <div class="nav-indicator">
+                    <mat-icon>home</mat-icon>
+                    <span>Home</span>
+                </div>
+            </a>
+    
+            <a mat-list-item routerLink="/SearchDoc" routerLinkActive="active" class="nav-item"
+                (click)="onNavClick('SearchDoc')">
+                <div class="nav-indicator">
+                    <mat-icon>description</mat-icon>
+                    <span>Search By Doc ID</span>
+                </div>
+            </a>
+            <a mat-list-item routerLink="/SearchRef" routerLinkActive="active" class="nav-item"
+                (click)="onNavClick('SearchRef')">
+                <div class="nav-indicator">
+                    <mat-icon>search</mat-icon>
+                    <span>Search By Ref ID</span>
+                </div>
+            </a>
+            <a mat-list-item routerLink="/profile" routerLinkActive="active" class="nav-item">
+                <div class="nav-indicator">
+                    <mat-icon>person</mat-icon>
+                    <span>Profile</span>
+                </div>
+            </a>
+    
+            <a mat-list-item routerLink="/settings" routerLinkActive="active" class="nav-item">
+                <div class="nav-indicator">
+                    <mat-icon>settings</mat-icon>
+                    <span>Settings</span>
+                </div>
+            </a>
+    
+            <a mat-list-item (click)="logout()" class="nav-item logout">
+                <div class="nav-indicator">
+                    <mat-icon>logout</mat-icon>
+                    <span>Logout</span>
+                </div>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    
+    <!-- 🏠 Main Content -->
+    <mat-sidenav-content>
+        <!-- 🌟 Toolbar -->
+        <mat-toolbar class="toolbar" color="primary">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="toolbar-title">Dashboard</span>
+            <span class="spacer"></span>
+        </mat-toolbar>
+    
+        <!-- 💡 Main Body -->
+        <div class="main-content">
+            <mat-card class="welcome-card glass-card">
+                <h1>Search Your Documents 🔍</h1>
+                <p>Enter your reference number to find PDFs instantly.</p>
+    
+                <!-- 🧾 Search -->
+                <mat-form-field appearance="outline" class="dashboard-search">
+                    <mat-label>Search by Reference</mat-label>
+                    <input matInput placeholder="e.g. REF-1001" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" />
+                    <button mat-icon-button matSuffix (click)="onSearch()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-form-field>
+    
+                <!-- 🕒 Loading -->
+                <div *ngIf="loading" class="search-status">
+                    <mat-progress-spinner diameter="45" mode="indeterminate"></mat-progress-spinner>
+                    <p>Searching your documents...</p>
+                </div>
+    
+                <!-- ⚠️ Error -->
+                <div *ngIf="error && !loading" class="search-error mat-elevation-z3">
+                    {{ error }}
+                </div>
+    
+                <!-- 📄 Results -->
+                <div *ngIf="!loading && results.length > 0" class="results-list">
+                    <mat-card *ngFor="let r of results" class="pdf-card mat-elevation-z3">
+                        <div class="pdf-info">
+                            <div class="pdf-title">{{ r.title }}</div>
+                            <div class="pdf-ref">Ref: {{ r.reference }}</div>
+                            <div class="pdf-date" *ngIf="r.uploadedAt">Uploaded: {{ r.uploadedAt }}</div>
+                        </div>
+                        <a mat-flat-button color="primary" [href]="r.url" target="_blank">Open PDF</a>
+                    </mat-card>
+                </div>
+    
+                <!-- 🗒️ No Results -->
+                <div *ngIf="!loading && !error && searchTerm && results.length === 0" class="no-results">
+                    <mat-icon>find_in_page</mat-icon>
+                    <p>No documents found for "<strong>{{ searchTerm }}</strong>"</p>
+                </div>
+            </mat-card>
+        </div>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
