@@ -30,6 +30,6 @@ export class PageLayoutComponent {
   constructor(private router: Router) { }
 
   goBack() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/user-dashboard']);
   }
 }

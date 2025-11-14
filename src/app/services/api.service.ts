@@ -43,16 +43,24 @@ export class ApiService {
   //       .catch((err) => observer.error(err));
   //   });
   // }
+  //################# for dummy data checking###############
   searchDocument(documentId: string): Observable<Blob> {
-    const url = `${this.baseUrl}mydms/searchdocument/${documentId}`;
-    console.log('🌐 Fetching from:', url);
+    const url = `${this.baseUrl}/mydms/searchdocument/${documentId}`;
+    console.log('Fetching from:', url);
     return this.http.get(url, { responseType: 'blob' });
   }
-//################# for dummy data checking###############
+
+  getDocumentsByRef(tnxreference: string, eventreference: string) {
+    const endpoint = `mydms/listdocumentsbyref?tnxreference=${tnxreference}&eventreference=${eventreference}`;
+    const url = this.buildUrl(endpoint);
+    console.log('GET Documents →', url);
+    return this.http.get<any[]>(url);
+  }
 
 
 
-  // 🔹 Unified method to build endpoint URLs safely
+
+  // Unified method to build endpoint URLs safely
   private buildUrl(endpoint: string): string {
     return `${this.baseUrl}/${endpoint.replace(/^\/+/, '')}`;
   }
