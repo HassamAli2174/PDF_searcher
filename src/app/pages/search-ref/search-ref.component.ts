@@ -20,8 +20,8 @@ import { ApiService } from '../../services/api.service';
     MatButtonModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    PageLayoutComponent
-  ],
+    PageLayoutComponent,
+],
   templateUrl: './search-ref.component.html',
   styleUrls: ['./search-ref.component.scss'],
 })
@@ -29,12 +29,49 @@ export class SearchRefComponent {
   masterRef = '';
   eventRef = '';
   documents: any[] = [];
-  displayedColumns: string[] = ['docid', 'filename', 'documentType'];
+  displayedColumns: string[] = ['docid', 'filename', 'documentType', 'description', 'docdoccat',
+    'doctype'];
   loading = false;
   searched = false;
+  // useDummyData = true; // switch to false when API is ready
+
+  // dummyDocuments = [
+  //   {
+  //     filename: 'Software Request Form.pdf',
+  //     documentType: 'application/pdf',
+  //     tnxreference: 'ILC/MBW/11/0004',
+  //     eventreference: 'ISS001',
+  //     description: 'Bill of exchange',
+  //     docid: 'DOC-001',
+  //     docdoccat: 'Attachment',
+  //     doctype: 'BOE-Bill of exchange'
+  //   },
+  //   {
+  //     filename: 'Commercial Invoice.pdf',
+  //     documentType: 'application/pdf',
+  //     tnxreference: 'ILC/MBW/11/0004',
+  //     eventreference: 'ISS001',
+  //     description: 'Commercial invoice',
+  //     docid: 'DOC-002',
+  //     docdoccat: 'Attachment',
+  //     doctype: 'COI-Commercial invoice'
+  //   },
+  //   {
+  //     filename: 'Acknowledgement.pdf',
+  //     documentType: 'application/pdf',
+  //     tnxreference: 'ILC/MBW/11/0004',
+  //     eventreference: 'ISS001',
+  //     description: 'ACKNOWLEDGEMENT TO APPLICANT',
+  //     docid: 'DOC-003',
+  //     docdoccat: 'Generated',
+  //     doctype: 'Internal'
+  //   }
+  // ];
+
   
   constructor(private api: ApiService) { }
 
+  //when using api service use this function
   onSearch() {
     if (!this.masterRef || !this.eventRef) {
       alert('Please enter both Master Reference and Event Reference');
@@ -57,6 +94,40 @@ export class SearchRefComponent {
       }
     });
   }
+
+
+  // For testing with dummy data
+  // onSearch() {
+  //   if (!this.masterRef || !this.eventRef) {
+  //     alert('Please enter both Master Reference and Event Reference');
+  //     return;
+  //   }
+
+  //   this.loading = true;
+  //   this.searched = true;
+  //   this.documents = [];
+
+  //   if (this.useDummyData) {
+  //     setTimeout(() => {
+  //       this.documents = this.dummyDocuments;
+  //       this.loading = false;
+  //       console.log('🧪 Dummy documents loaded:', this.documents);
+  //     }, 600); // simulate API delay
+  //     return;
+  //   }
+
+  //   // 🔴 Real API call
+  //   this.api.getDocumentsByRef(this.masterRef, this.eventRef).subscribe({
+  //     next: (res) => {
+  //       this.documents = res;
+  //       this.loading = false;
+  //     },
+  //     error: () => {
+  //       this.loading = false;
+  //     }
+  //   });
+  // }
+
 
 
   // For downloading/opening document - currently not used
