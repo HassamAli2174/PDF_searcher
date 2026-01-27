@@ -1,0 +1,23 @@
+<div class="layout">
+
+    <!-- TOPBAR -->
+    <app-topbar (toggleSidebarEvent)="toggleSidebar()" [collapsed]="collapsed"></app-topbar>
+
+    <div class="body">
+
+        <!-- SIDEBAR -->
+        <app-sidebar [collapsed]="collapsed" [menuItems]="activeMenu()"></app-sidebar>
+
+        <!-- MAIN CONTENT -->
+        <main class="content" [class.collapsed]="collapsed">
+            <router-outlet></router-outlet>
+        </main>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        © 2026 DocuFinder. All Rights Reserved
+    </footer>
+
+</div>

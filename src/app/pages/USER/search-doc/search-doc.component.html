@@ -1,0 +1,45 @@
+<!-- 💡 Main Body -->
+<div class="main-content">
+    <div class="page-wrapper">
+
+        <!-- Header -->
+        <div class="page-header">
+            <h1>Search Document</h1>
+            <p>Locate your document instantly using its unique Document ID.</p>
+        </div>
+
+        <!-- Search Card -->
+        <mat-card class="search-card mat-elevation-z3">
+
+            <mat-card-content>
+
+                <div class="search-row">
+                    <mat-form-field appearance="outline" class="search-field">
+                        <mat-label>Document ID</mat-label>
+                        <input matInput [(ngModel)]="searchTerm" placeholder="e.g. DOC-2026-001"
+                            (keyup.enter)="onSearch()" />
+                        <mat-icon matPrefix>description</mat-icon>
+                    </mat-form-field>
+
+                    <button mat-flat-button color="primary" class="search-btn" (click)="onSearch()"
+                        [disabled]="loading || !searchTerm">
+
+                        <mat-icon *ngIf="!loading">search</mat-icon>
+                        <mat-spinner *ngIf="loading" diameter="18"></mat-spinner>
+                        <span>{{ loading ? 'Searching...' : 'Search' }}</span>
+
+                    </button>
+                </div>
+
+                <!-- Result -->
+                <div class="result-box" *ngIf="resultMessage">
+                    <mat-icon>info</mat-icon>
+                    <span>{{ resultMessage }}</span>
+                </div>
+
+            </mat-card-content>
+
+        </mat-card>
+
+    </div>
+</div>

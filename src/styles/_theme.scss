@@ -1,0 +1,58 @@
+/* =====================================================
+   GLOBAL ENTERPRISE COLOR SYSTEM
+   Formal Blue / Fintech Theme
+===================================================== */
+
+/* ---------- Brand Blues ---------- */
+$primary: #0a3d91; // Deep corporate blue
+$primary-hover: #0d4fb8; // Hover blue
+$primary-dark: #072f6b; // Dark emphasis
+$primary-soft: #eaf1ff; // Soft background blue
+
+/* ---------- Backgrounds ---------- */
+$bg-body: #f3f6fb; // App background
+$bg-content: #f7f9fd; // Content panels
+$white: #ffffff;
+
+/* ---------- Sidebar ---------- */
+$sidebar-bg: #ffffff;
+$sidebar-border: #e1e7f2;
+$sidebar-hover-bg: #eef4ff;
+$sidebar-active-bg: #e3edff;
+$sidebar-active-border: #b7cdfa;
+
+/* ---------- Text ---------- */
+$text-primary: #1f2937; // Main text (dark slate)
+$text-secondary: #4b5563; // Secondary text
+$text-muted: #6b7280; // Muted text
+$text-white: #ffffff;
+
+/* ---------- Links & States ---------- */
+$link-active: $primary;
+$link-hover: $primary-hover;
+
+/* ---------- Submenu ---------- */
+$submenu-border: #d5e2ff;
+$submenu-hover-bg: #eef4ff;
+$submenu-active-bg: #dbe8ff;
+
+/* ---------- Borders ---------- */
+$border-light: #e5e9f2;
+$border-primary: #b7cdfa;
+
+/* ---------- Shadows ---------- */
+$shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+/* ---------- Buttons ---------- */
+$btn-primary-bg: $primary;
+$btn-primary-hover: $primary-hover;
+$btn-shadow: 0 3px 10px rgba(10, 61, 145, 0.25);
+
+/* ---------- Radius & Spacing ---------- */
+$radius-sm: 6px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$gap-sm: 8px;
+$gap-md: 16px;
+$gap-lg: 24px;

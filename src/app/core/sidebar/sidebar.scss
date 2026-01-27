@@ -1,0 +1,148 @@
+/* ===================== SIDEBAR CONTAINER ===================== */
+.side-nav {
+    width: 260px;
+    height: 100vh;
+    background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    // box-shadow: 6px 0 18px rgba(0, 0, 0, 0.06);
+    border-radius: 0 20px 20px 0;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease, padding 0.3s ease;
+
+    &.collapsed {
+        width: 72px;
+        padding: 18px 10px;
+
+        .menu-list span {
+            display: none;
+        }
+
+        .submenu {
+            display: none;
+        }
+    }
+}
+
+
+/* ===================== TOGGLE BUTTON ===================== */
+.toggle-btn {
+    align-self: flex-end;
+    margin-bottom: 18px;
+    background: rgba(25, 118, 210, 0.08);
+    border: none;
+    border-radius: 10px;
+    padding: 6px;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+
+    mat-icon {
+        font-size: 22px;
+        color: #1976d2;
+    }
+
+    &:hover {
+        background: rgba(25, 118, 210, 0.15);
+        transform: scale(1.05);
+    }
+}
+
+/* ===================== MENU LIST ===================== */
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+
+    li {
+        margin-bottom: 6px;
+    }
+}
+
+/* ===================== MENU BUTTON ===================== */
+.menu-btn,
+.menu-list>li>a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #2c3e50;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease;
+
+    mat-icon {
+        font-size: 20px;
+        color: #5c6bc0;
+        transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    &:hover {
+        background: rgba(25, 118, 210, 0.08);
+        color: #1976d2;
+
+        mat-icon {
+            color: #1976d2;
+            transform: scale(1.1);
+        }
+    }
+}
+
+/* ===================== ACTIVE MENU ITEM ===================== */
+.menu-list>li>a.active,
+.menu-btn.active {
+    background: rgba(25, 118, 210, 0.14);
+    color: #1976d2;
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 #1976d2;
+
+    mat-icon {
+        color: #1976d2;
+    }
+}
+
+/* ===================== SUBMENU ===================== */
+.submenu {
+    margin-top: 6px;
+    margin-left: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    a {
+        padding: 8px 12px;
+        font-size: 13.5px;
+        color: #555;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: rgba(25, 118, 210, 0.08);
+            color: #1976d2;
+        }
+
+        &.active-sub {
+            background: rgba(25, 118, 210, 0.15);
+            color: #1976d2;
+            font-weight: 600;
+        }
+    }
+}
+
+/* ===================== SCROLLBAR (OPTIONAL POLISH) ===================== */
+.side-nav::-webkit-scrollbar {
+    width: 6px;
+}
+
+.side-nav::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+}

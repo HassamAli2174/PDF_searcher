@@ -1,0 +1,53 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: #f4f8ff;
+
+    .body {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+
+        /* Sidebar + Content handled via child components */
+        main.content {
+            flex: 1;
+            padding: 24px;
+            background: #f7faff;
+            overflow-y: auto;
+            transition: margin-left 0.3s ease;
+
+            &.collapsed {
+                margin-left: 70px;
+                /* align with collapsed sidebar width */
+            }
+        }
+    }
+
+    footer.footer {
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        background: #ffffff;
+        border-top: 1px solid #d7e3ff;
+        font-size: 14px;
+        color: #556;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+        flex-shrink: 0;
+    }
+}
+
+/* Optional scrollbar styling for main content */
+main.content::-webkit-scrollbar {
+    width: 8px;
+}
+
+main.content::-webkit-scrollbar-thumb {
+    background-color: rgba(25, 118, 210, 0.3);
+    border-radius: 4px;
+}
+
+main.content::-webkit-scrollbar-track {
+    background: transparent;
+}

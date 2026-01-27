@@ -1,0 +1,37 @@
+<mat-toolbar class="topbar">
+
+  <!-- LEFT: Menu Toggle -->
+  <!-- <button mat-icon-button class="icon-btn" (click)="toggleSidebar()">
+    <mat-icon>menu</mat-icon>
+  </button> -->
+
+  <!-- BRAND -->
+  <div class="brand">
+    <span class="brand-name">DocuFinder</span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+
+    <!-- Notifications -->
+    <button mat-icon-button class="icon-btn" matTooltip="Notifications">
+      <mat-icon>notifications</mat-icon>
+      <span class="badge">3</span>
+    </button>
+
+    <!-- User Info -->
+    <div class="user-info">
+      <span class="user-name">{{ userName}}</span>
+      <mat-icon>account_circle</mat-icon>
+    </div>
+
+    <!-- Logout -->
+    <button mat-icon-button class="icon-btn" matTooltip="Logout" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+
+  </div>
+
+</mat-toolbar>

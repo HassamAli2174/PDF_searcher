@@ -1,98 +1,71 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
+import { authGuard } from './core/guards/auth.guard';
+import { PageLayoutComponent } from './core/page-layout/page-layout.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'user-dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
     loadComponent: () =>
-      import('./pages/login/login.component').then(m => m.LoginComponent),
+      import('./pages/AUTH/login/login.component').then(m => m.LoginComponent),
   },
   {
     path: 'signup',
     loadComponent: () =>
-      import('./pages/signup/signup.component').then(m => m.SignupComponent),
+      import('./pages/AUTH/signup/signup.component').then(m => m.SignupComponent),
   },
   {
-    path: 'admin-dashboard',
-    canActivate: [authGuard],
-    data: { role: 'ADMIN' }, // only ADMIN
-    loadComponent: () =>
-      import('./pages/admin-dashboard/admin-dashboard.component').then(
-        m => m.AdminDashboardComponent
-      ),
-  },
-  {
-    path: 'user-dashboard',
-    canActivate: [authGuard],
-    data: { role: 'USER' }, // only USER
-    loadComponent: () =>
-      import('./pages/user-dashboard/user-dashboard.component').then(
-        m => m.UserDashboardComponent
-      ),
-  },
-  {
-    path: 'SearchDoc',
-    loadComponent: () =>
-      import('./pages/search-doc/search-doc.component').then(
-        m => m.SearchDocComponent
-      ),
-  },
-  {
-    path: 'SearchRef',
-    loadComponent: () =>
-      import('./pages/search-ref/search-ref.component').then(
-        m => m.SearchRefComponent
-      ),
+    path: '',
+    component: PageLayoutComponent,
+    // canActivate: [authGuard],
+    children: [
+      {
+
+        path: 'adminPanel',
+        data: { role: 'ADMIN' }, // only ADMIN
+        loadComponent: () =>
+          import('./pages/ADMIN/admin-dashboard/admin-dashboard.component').then(
+            m => m.AdminDashboardComponent
+          ),
+        children: [
+          {
+            path: "create-user",
+            loadComponent: () =>
+              import("./pages/ADMIN/create-user/create-user.component")
+                .then((m) => m.CreateUserComponent),
+          },
+          {
+            path: 'inquiry-records',
+            loadComponent: () =>
+              import(
+                './pages/ADMIN/inquiry-records/inquiry-records.component'
+              ).then((m) => m.InquiryRecordsComponent),
+          }
+        ]
+      },
+      {
+        path: 'userPanel',
+        // canActivate: [authGuard],
+        data: { role: 'USER' }, // only USER
+        loadComponent: () =>
+          import('./pages/USER/user-dashboard/user-dashboard.component').then(
+            m => m.UserDashboardComponent
+          ),
+      },
+      {
+        path: 'userPanel/SearchDoc',
+        loadComponent: () =>
+          import('./pages/USER/search-doc/search-doc.component').then(
+            m => m.SearchDocComponent
+          ),
+      },
+      {
+        path: 'userPanel/SearchRef',
+        loadComponent: () =>
+          import('./pages/USER/search-ref/search-ref.component').then(
+            m => m.SearchRefComponent
+          ),
+      }
+    ],
   },
 ];
-
-
-// import { Routes } from '@angular/router';
-// import { authGuard } from './guards/auth.guard';
-
-// export const routes: Routes = [
-//   { path: '', redirectTo: 'login', pathMatch: 'full' },
-//   {
-//     path: 'login',
-//     loadComponent: () =>
-//       import('./pages/login/login.component').then((m) => m.LoginComponent),
-//   },
-//   {
-//     path: 'signup',
-//     loadComponent: () =>
-//       import('./pages/signup/signup.component').then((m) => m.SignupComponent),
-//   },
-//   {
-//     path: 'admin-dashboard',
-//     canActivate: [authGuard],
-//     loadComponent: () =>
-//       import('./pages/admin-dashboard/admin-dashboard.component').then(
-//         (m) => m.AdminDashboardComponent
-//       ),
-//   },
-//   {
-//     path: 'user-dashboard',
-//     canActivate: [authGuard],
-//     loadComponent: () =>
-//       import('./pages/user-dashboard/user-dashboard.component').then(
-//         (m) => m.UserDashboardComponent
-//       ),
-//   },
-//   {
-//     path: 'SearchDoc',
-//     // canActivate: [authGuard],
-//     loadComponent: () =>
-//       import('./pages/search-doc/search-doc.component').then(
-//         (m) => m.SearchDocComponent
-//       ),
-//   },
-//   {
-//     path: 'SearchRef',
-//     // canActivate: [authGuard],
-//     loadComponent: () =>
-//       import('./pages/search-ref/search-ref.component').then(
-//         (m) => m.SearchRefComponent
-//       ),
-//   },
-// ];

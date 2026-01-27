@@ -1,0 +1,35 @@
+<aside class="side-nav" [class.collapsed]="isCollapsed()">
+
+  <button class="toggle-btn" (click)="toggleSidebar()">
+    <mat-icon>{{ isCollapsed() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+  </button>
+
+<ul class="menu-list">
+  <li *ngFor="let item of menuItems">
+
+    <!-- ITEM WITH CHILDREN -->
+    <div *ngIf="item.children" class="menu-group">
+      <button class="menu-btn" (click)="toggleMenu(item)">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span *ngIf="!collapsed">{{ item.label }}</span>
+        <mat-icon *ngIf="!collapsed">
+          {{ item.open ? 'expand_less' : 'expand_more' }}
+        </mat-icon>
+      </button>
+      <div class="submenu" *ngIf="item.open && !collapsed">
+        <a *ngFor="let c of item.children" [routerLink]="c.route" routerLinkActive="active-sub">
+          {{ c.label }}
+        </a>
+      </div>
+    </div>
+
+    <!-- SIMPLE LINK -->
+    <a *ngIf="!item.children" [routerLink]="item.route" (click)="item.label === 'Logout' ? logout() : null">
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span *ngIf="!collapsed">{{ item.label }}</span>
+    </a>
+
+  </li>
+</ul>
+
+</aside>
