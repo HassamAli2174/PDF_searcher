@@ -1,1 +1,62 @@
-<p>create-user works!</p>
+<div class="create-user-container" [formGroup]="userForm">
+    <h2>Create User</h2>
+
+    <form (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Login ID</mat-label>
+            <input matInput formControlName="loginid" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>User Status</mat-label>
+            <mat-select formControlName="userstatus">
+                <mat-option value="ACTIVE">Active</mat-option>
+                <mat-option value="INACTIVE">Inactive</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contact Number</mat-label>
+            <input matInput type="tel" formControlName="contactno">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email ID</mat-label>
+            <input matInput type="email" formControlName="emailid">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Mailing Address</mat-label>
+            <textarea matInput formControlName="mailingaddress" rows="3"></textarea>
+        </mat-form-field>
+
+        <!-- <mat-checkbox formControlName="changepassword">Change Password on Next Login</mat-checkbox> -->
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Employee ID</mat-label>
+            <input matInput formControlName="employeeid">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>User Category</mat-label>
+            <mat-select formControlName="usercat">
+                <mat-option value="ADMIN">Admin</mat-option>
+                <mat-option value="USER">User</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+            Save User
+        </button>
+    </form>
+</div>

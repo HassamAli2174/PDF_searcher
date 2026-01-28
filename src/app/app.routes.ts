@@ -20,28 +20,25 @@ export const routes: Routes = [
     // canActivate: [authGuard],
     children: [
       {
-
         path: 'adminPanel',
         data: { role: 'ADMIN' }, // only ADMIN
         loadComponent: () =>
           import('./pages/ADMIN/admin-dashboard/admin-dashboard.component').then(
             m => m.AdminDashboardComponent
           ),
-        children: [
-          {
-            path: "create-user",
-            loadComponent: () =>
-              import("./pages/ADMIN/create-user/create-user.component")
-                .then((m) => m.CreateUserComponent),
-          },
-          {
-            path: 'inquiry-records',
-            loadComponent: () =>
-              import(
-                './pages/ADMIN/inquiry-records/inquiry-records.component'
-              ).then((m) => m.InquiryRecordsComponent),
-          }
-        ]
+      },
+      {
+        path: "adminPanel/CreateUser",
+        loadComponent: () =>
+          import("./pages/ADMIN/create-user/create-user.component")
+            .then((m) => m.CreateUserComponent),
+      },
+      {
+        path: 'adminPanel/InquiryRecords',
+        loadComponent: () =>
+          import(
+            './pages/ADMIN/inquiry-records/inquiry-records.component'
+          ).then((m) => m.InquiryRecordsComponent),
       },
       {
         path: 'userPanel',

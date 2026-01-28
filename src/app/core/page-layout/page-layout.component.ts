@@ -58,8 +58,8 @@ export class PageLayoutComponent {
       icon: 'people',
       open: false,
       children: [
-        { label: 'Create User', route: '/adminPanel/create-user' },
-        { label: 'Inquiries', route: '/adminPanel/inquiry-records' },
+        { label: 'Create User', route: '/adminPanel/CreateUser' },
+        { label: 'Inquiries', route: '/adminPanel/InquiryRecords' },
       ]
     },
     {

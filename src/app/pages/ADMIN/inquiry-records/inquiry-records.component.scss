@@ -1,0 +1,238 @@
+@use "sass:color";
+@use '../../../../styles/theme' as theme;
+
+/* ================= HEADER ================= */
+.page-header {
+    margin-bottom: 16px;
+
+    h2 {
+        margin: 0;
+        font-size: 1.2rem;
+        color: theme.$text-secondary;
+    }
+
+    p {
+        margin: 4px 0 0;
+        font-size: 0.85rem;
+        color: theme.$text-secondary;
+    }
+}
+
+/* ================= SEARCH SYSTEM ================= */
+.search-system {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+
+    .search-input-group {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: theme.$white;
+        border: 1px solid theme.$border-light;
+        border-radius: theme.$radius-sm;
+        padding: 6px 10px;
+        flex: 1;
+
+        input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 0.85rem;
+        }
+
+        mat-icon {
+            font-size: 18px;
+            color: theme.$text-secondary;
+        }
+
+        .clear-btn {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+    }
+}
+
+/* ================= TABS ================= */
+.ui-tabs {
+    display: flex;
+    gap: 6px;
+    // margin-bottom: 8px;
+    overflow-x: auto;
+
+    .tab {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+        border-radius: 16px;
+        background: theme.$sidebar-hover-bg;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.2s ease;
+
+        &.active {
+            background: theme.$primary;
+            color: theme.$white;
+        }
+    }
+}
+
+/* ================= FILTER ROW ================= */
+.filter-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+
+    .results-summary {
+        font-size: 0.8rem;
+        color: theme.$text-secondary;
+    }
+}
+
+/* ================= TABLE WRAPPER ================= */
+.table-wrapper {
+    background: theme.$white;
+    border-radius: theme.$radius-lg;
+    border: 1px solid theme.$border-light;
+    overflow-x: auto;
+    
+}
+
+/* ================= TABLE ================= */
+table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+thead {
+    background: theme.$primary-soft;
+
+    th {
+        padding: 10px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: theme.$text-secondary;
+        white-space: nowrap;
+        cursor: pointer;
+        text-align: center;
+        vertical-align: middle;
+
+        &:hover {
+            background: color.scale(theme.$border-primary, $lightness: -4%);
+        }
+    }
+}
+
+tbody {
+    tr {
+        border-top: 1px solid theme.$border-light;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: theme.$sidebar-hover-bg;
+        }
+    }
+
+    td {
+        padding: 10px;
+        font-size: 0.8rem;
+        color: theme.$text-secondary;
+        white-space: nowrap;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+/* ================= STATUS BADGE ================= */
+.status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    display: inline-block;
+
+    &.active {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    &.inactive {
+        background: #fee2e2;
+        color: #991b1b !important;
+    }
+}
+
+/* ================= ACTION BUTTON ================= */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border: none;
+    border-radius: 25px;
+    background: theme.$submenu-active-bg;
+    color: theme.$primary;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    mat-icon {
+        font-size: 16px;
+    }
+
+    &:hover {
+        background: color.scale(theme.$primary-soft, $lightness: -10%);
+    }
+}
+
+/* ================= NO RECORDS ================= */
+.no-records {
+    text-align: center;
+    padding: 30px;
+    font-size: 0.85rem;
+    color: theme.$text-secondary;
+}
+
+/* ================= PAGINATION ================= */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+
+    span {
+        font-size: 0.8rem;
+        color: theme.$text-secondary;
+    }
+
+    .btn-pagination {
+        background: theme.$primary-soft;
+        border: 1px solid theme.$border-light;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    table {
+        min-width: 700px;
+    }
+
+    .filter-row {
+        justify-content: center;
+    }
+}

@@ -33,6 +33,7 @@ export class LoginComponent {
     const pass = this.password.toLowerCase();
     if (login === 'admin' && pass === 'admin') {
       sessionStorage.setItem('role', 'ADMIN');
+      sessionStorage.setItem('loggedInUserId', 'ADMIN');
       this.router.navigate(['/adminPanel']);
       
     } else if (login === 'user' && pass === 'user'){
