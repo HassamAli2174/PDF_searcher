@@ -54,6 +54,14 @@ export class PageLayoutComponent {
       route: '/adminPanel'
     },
     {
+      label: 'Product',
+      icon: 'shopping_cart',
+      open: false,
+      children:[
+        { label: 'Create Product', route: '/adminPanel/CreateProduct' },
+      ]
+    },
+    {
       label: 'Users',
       icon: 'people',
       open: false,

@@ -28,6 +28,12 @@ export const routes: Routes = [
           ),
       },
       {
+        path: "adminPanel/CreateProduct",
+        loadComponent: () =>
+          import("./pages/ADMIN/create-product/create-product.component")
+            .then((m) => m.CreateProductComponent),
+      },
+      {
         path: "adminPanel/CreateUser",
         loadComponent: () =>
           import("./pages/ADMIN/create-user/create-user.component")

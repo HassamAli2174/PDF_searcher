@@ -1,0 +1,14 @@
+<div class="create-user-container">
+    <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Product Code</mat-label>
+            <input matInput formControlName="productcode" required />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+            Add Product Code
+        </button>
+
+    </form>
+</div>

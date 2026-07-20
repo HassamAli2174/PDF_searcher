@@ -11,6 +11,7 @@ export class ApiService {
 
   // private baseUrl = environment.apiUrl; // coming from environment file
   private baseUrl = environment.apiUrl.replace(/\/$/, '');
+  private productBaseUrl = environment.productApiUrl.replace(/\/$/, '');
 
   constructor(private http: HttpClient) { }
 
@@ -57,8 +58,20 @@ export class ApiService {
     return this.http.get<any[]>(url);
   }
 
+  // addProduct(productCode: string): Observable<any> {
+  //   return this.postData('addproduct', {
+  //     productcode: productCode
+  //   });
+  // }
 
-
+  addProduct(productCode: string): Observable<any> {
+    return this.http.post(
+      `${this.productBaseUrl}/addproduct`,
+      {
+        productcode: productCode
+      }
+    );
+  }
 
   // Unified method to build endpoint URLs safely
   private buildUrl(endpoint: string): string {
